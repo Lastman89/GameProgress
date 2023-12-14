@@ -15,9 +15,7 @@ public class Main {
         zipFiles(path, files.list());
 
         for (int i = 0; i < files.list().length; i++) {
-            // String delFiles =
             if (files.list()[i].contains("zip")) {
-
                 continue;
             } else {
                 File delFiles = new File(path + files.list()[i]);
@@ -45,7 +43,7 @@ public class Main {
             String saveGame = listZip[i];
             try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(path + "saveGame.zip"));
                  FileInputStream fis = new FileInputStream(path + saveGame)) {
-                ZipEntry entry = new ZipEntry(path + "saveGame.dat");
+                ZipEntry entry = new ZipEntry("saveGame.dat");
                 zout.putNextEntry(entry);
                 // считываем содержимое файла в массив byte
                 byte[] buffer = new byte[fis.available()];
