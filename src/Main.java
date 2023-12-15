@@ -7,12 +7,19 @@ import java.util.zip.ZipOutputStream;
 
 public class Main {
     public static void main(String[] args) {
-        GameProgress progress = new GameProgress(100, 15, 38, 12.5);
-        String path = "D:\\Учеба\\JAVA\\Progi\\Core\\Games\\Games\\savegames\\";
-        saveGame(path, progress);
-
+        GameProgress [] progress = {
+                new GameProgress(100, 15, 38, 12.5),
+                new GameProgress(100, 18, 40, 13.0),
+                new GameProgress(100, 20, 42, 13.5)
+        };
         File files = new File("D:\\Учеба\\JAVA\\Progi\\Core\\Games\\Games\\savegames\\");
-        zipFiles(path, files.list());
+        String path = "D:\\Учеба\\JAVA\\Progi\\Core\\Games\\Games\\savegames\\";
+
+        for (int i = 0; i < progress.length; i++) {
+            saveGame(path, progress[i]);
+            zipFiles(path, files.list());
+
+        }
 
         for (int i = 0; i < files.list().length; i++) {
             if (files.list()[i].contains("zip")) {
@@ -41,9 +48,9 @@ public class Main {
 
         for (int i = 0; i < listZip.length; i++) {
             String saveGame = listZip[i];
-            try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(path + "saveGame.zip"));
+            try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(path + "saveGame" + i + ".zip"));
                  FileInputStream fis = new FileInputStream(path + saveGame)) {
-                ZipEntry entry = new ZipEntry("saveGame.dat");
+                ZipEntry entry = new ZipEntry("saveGame" + i + ".dat");
                 zout.putNextEntry(entry);
                 // считываем содержимое файла в массив byte
                 byte[] buffer = new byte[fis.available()];
