@@ -29,7 +29,6 @@ public class Main {
     }
 
     public static void saveGame(String path, GameProgress[] progress) {
-        //int num = (int) Math.random();
         for (int i = 0; i < progress.length; i++) {
             try (FileOutputStream fos = new FileOutputStream(path + "save" + i + ".dat");
                  ObjectOutputStream oos = new ObjectOutputStream(fos)) {
@@ -46,7 +45,6 @@ public class Main {
         ZipOutputStream zout = null;
         try {
             zout = new ZipOutputStream(new FileOutputStream(path + "saveGame.zip"));
-            //ZipOutputStream zipOut = new ZipOutputStream(zout);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -63,7 +61,6 @@ public class Main {
                 // закрываем текущую запись для новой записи
                 zout.closeEntry();
                 fis.close();
-
 
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
